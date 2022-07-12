@@ -1,0 +1,325 @@
+@font-face {
+    font-family: 'Bariol Regular';
+    src: url('fonts/Bariol_Regular.otf');
+}
+
+@font-face {
+    font-family: 'Bariol Bold';
+    src: url('fonts/Bariol_Bold.otf');
+}
+
+@font-face {
+    font-family: 'Gotham Bold';
+    src: url('fonts/GothamSSm-Bold.otf');
+}
+
+@font-face {
+    font-family: 'Gotham Black';
+    src: url('fonts/GothamSSm-Black.otf');
+}
+
+html,
+body {
+    min-height: 100vh;
+}
+
+h1,
+.h1,
+h2,
+.h2,
+h3,
+.h3,
+h4,
+.h4,
+h5,
+.h5,
+h6,
+.h6 {
+    font-family: 'Gotham Bold';
+    letter-spacing: -1px;
+}
+
+strong {
+    font-family: 'Bariol Bold', sans-serif;
+}
+
+.card {
+    padding: 30px;
+    margin: auto;
+    max-width: 500px;
+    border-radius: 15px;
+}
+
+.card .ds-card-back {
+    position: absolute;
+}
+
+.card-title {
+    color: #ce009f;
+    font-family: 'Gotham Bold', sans-serif;
+    font-size: 22px;
+    letter-spacing: -1px;
+    text-align: center;
+}
+
+.card .form-group {
+    position: relative;
+    padding: 14px 0;
+}
+
+.card .form-group:first-of-type {
+    margin-top: 30px;
+}
+
+.card .form-group:last-of-type {
+    padding-bottom: 0;
+}
+
+.card .form-label {
+    color: #333;
+    font-size: 14px;
+    line-height: 14px;
+    position: absolute;
+    top: 0;
+    margin-bottom: 0;
+    transition: all 0.1s ease-in-out;
+}
+
+.form-label.ds-form-label-empty {
+    color: #8a8a8a;
+    font-size: 17px;
+    line-height: 32px;
+    top: 14px;
+}
+
+.card .form-control {
+    font-size: 17px;
+    line-height: 32px;
+    padding: 0;
+    border: none;
+    border-bottom: 1px solid #e0e0e0;
+    border-radius: 0;
+}
+
+.card .form-control:focus {
+    border-bottom-color: #362abf;
+    box-shadow: 0 1px 0 #362abf;
+}
+
+.card .form-control:hover {
+    border-bottom-color: #aaa;
+}
+
+.card .form-text {
+    color: #777;
+}
+
+
+
+
+#welcome,
+#create-account {
+    color: #fff;
+    font-family: 'Bariol Regular', sans-serif;
+    background-color: #100254;
+}
+
+#welcome .ds-logo {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    height: 570px;
+}
+
+#welcome .ds-logo img {
+    margin: 0 auto 15px;
+    width: 250px;
+}
+
+#welcome .ds-logo p {
+    font-size: 20px;
+    text-align: center;
+    margin-bottom: 0;
+}
+
+#welcome .btn-secondary {
+    color: #362ABF;
+    font-family: 'Bariol Bold', sans-serif;
+    font-size: 20px;
+    background-color: #fff;
+    display: block;
+    padding: 15px;
+    border-radius: 100px;
+}
+
+#welcome .btn-link {
+    color: #fff;
+    font-family: 'Bariol Bold', sans-serif;
+    font-size: 20px;
+    display: block;
+    padding: 15px;
+}
+
+#create-account .ds-card-back img {
+    height: 20px;
+}
+
+#create-account #password-help {
+    margin-top: 15px;
+}
+
+#create-account #password-help ul {
+    margin-bottom: 0;
+}
+
+#create-account #password-help li {
+    position: relative;
+    padding-left: 20px;
+}
+
+#create-account #password-help img {
+    position: absolute;
+    top: 3px;
+    left: 0;
+    height: 14px;
+}
+
+#create-account p {
+    color: #777;
+    font-size: 14px;
+    text-align: left;
+    margin: 15px 0 30px;
+}
+
+#create-account a {
+    color: #362abf;
+}
+
+#create-account .btn-primary {
+    font-size: 20px;
+    background-color: #362abf;
+    display: block;
+    padding: 10px;
+    width: 100%;
+    border-color: #362abf;
+    border-radius: 100px;
+    box-shadow: 0 0 0 0 rgba(54, 42, 191, 0);
+    transition: all 0.15s ease-in-out;
+}
+
+#create-account .btn-primary:focus {
+    box-shadow: 0 0 0 0.25rem rgba(54, 42, 191, 0.25);
+}
+
+
+
+
+
+[v-cloak] {
+    display: none;
+}
+
+#find-care {
+    font-family: 'Bariol Regular', sans-serif;
+}
+
+#find-care .ds-side-nav {
+    background-color: #100254;
+    position: fixed;
+    padding: 30px 0;
+    width: 200px;
+    height: 100vh;
+}
+
+#find-care .ds-side-nav .nav-link {
+    color: #fff;
+    font-size: 16px;
+    line-height: 32px;
+    padding-right: 30px;
+    padding-left: 30px;
+}
+
+#find-care .ds-side-nav .nav-link:focus,
+#find-care .ds-side-nav .nav-link:hover {
+    background-color: rgba(54, 42, 191, 0.4);
+    outline: none;
+}
+
+#find-care .ds-side-nav .nav-link.active {
+    background-color: #362abf;
+}
+
+#find-care .ds-side-nav .ds-logo {
+    margin: 0 0 30px 30px;
+    height: 30px;
+}
+
+#find-care .ds-side-nav .ds-nav-icon {
+    margin-top: -2px;
+    margin-right: 10px;
+    filter: invert(1);
+    height: 18px;
+}
+
+#find-care .ds-results {
+    padding: 0 45px 45px 245px;
+}
+
+#find-care .ds-results form {
+    background-color: #fff;
+    position: sticky;
+    top: 0;
+    padding: 45px 45px 15px;
+    margin-left: -45px;
+    width: calc(100% + 90px);
+}
+
+#find-care .ds-results-list a {
+    color: #333;
+    text-decoration: none;
+    padding: 30px 15px;
+    border-radius: 15px;
+    transition: all 0.15s ease-in-out;
+}
+
+#find-care .ds-results-list a:focus,
+#find-care .ds-results-list a:hover {
+    background-color: rgba(54, 42, 191, 0.05);
+    outline: none;
+}
+
+#find-care .ds-results-list>li:not(:last-of-type) {
+    border-bottom: 1px solid #eee;
+}
+
+#find-care .ds-stethoscope-icon {
+    line-height: 50px;
+    text-align: center;
+    background-color: rgba(54, 42, 191, 0.05);
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    transition: all 0.15s ease-in-out;
+}
+
+#find-care .ds-results-list a.active .ds-stethoscope-icon,
+#find-care .ds-results-list a:focus .ds-stethoscope-icon,
+#find-care .ds-results-list a:hover .ds-stethoscope-icon {
+    background-color: transparent;
+}
+
+#find-care .ds-results-list-icon {
+    margin-top: -3px;
+    margin-right: 5px;
+    width: 15px;
+    height: 15px;
+}
+
+#find-care .ds-stethoscope-icon img {
+    height: 25px;
+}
+
+#find-care .ds-side-details {
+    width: 400px;
+    border-left: 1px solid #eee;
+}

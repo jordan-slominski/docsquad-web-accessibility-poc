@@ -1,0 +1,90 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Create Account | DocSquad</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+    <link href="style.css" rel="stylesheet">
+</head>
+
+<body id="create-account">
+    <div class="container-fluid vh-100 px-4">
+        <div class="row align-items-center vh-100">
+            <div class="col">
+                <div class="card">
+                    <a class="ds-card-back" href="index.html" aria-label="Back to welcome screen">
+                        <img src="images/sf-chevron-left.svg" alt="">
+                    </a>
+                    <h1 class="card-title h4">Create Account</h1>
+                    <form>
+                        <div class="form-group">
+                            <label class="form-label ds-form-label-empty" for="email">Email</label>
+                            <input class="form-control" id="email" required>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label ds-form-label-empty" for="password" required>Password</label>
+                            <input class="form-control" id="password" type="password" aria-describedby="password-help">
+                            <div id="password-help" class="form-text">
+                                <ul class="list-inline">
+                                    <li class="list-inline-item">
+                                        <img src="images/icon_cross_circle.svg">8+ Characters,
+                                    </li>
+                                    <li class="list-inline-item">
+                                        <img src="images/icon_cross_circle.svg">Number,
+                                    </li>
+                                    <li class="list-inline-item">
+                                        <img src="images/icon_cross_circle.svg">Uppercase,
+                                    </li>
+                                    <li class="list-inline-item">
+                                        <img src="images/icon_cross_circle.svg">Lowercase,
+                                    </li>
+                                    <li class="list-inline-item">
+                                        <img src="images/icon_cross_circle.svg">Special Character (!@#$%^&*)
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        <p>By creating an account, you agree to DocSquad <a
+                                href="https://docsquad.com/terms-of-use.html" target="_blank">Terms of Use</a> and <a
+                                href="https://docsquad.com/privacy-policy.html" target="_blank">Privacy Policy</a></p>
+                        <button id="submit" class="btn btn-primary" type="submit" disabled>
+                            Create
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+        </main>
+        <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.5/dist/umd/popper.min.js"
+            integrity="sha384-Xe+8cL9oJa6tN/veChSP7q+mnSPaj5Bcu9mPX5F5xIGE0DVittaqT5lorf0EI7Vk"
+            crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.min.js"
+            integrity="sha384-kjU+l4N0Yf4ZOJErLsIcvOU2qSb74wXpOhqTvwVx3OElZRweTnQ6d31fXEoRD1Jy"
+            crossorigin="anonymous"></script>
+        <script>
+            function validateFormInputs() {
+                const email = document.getElementById('email');
+                const password = document.getElementById('password');
+                const validEmailRegex = /\S+@\S+\.\S+/;
+                document.getElementById('submit').disabled = !(email.value !== '' && password.value !== '' && validEmailRegex.test(email.value));
+            }
+            document.querySelectorAll('.form-control').forEach(input => {
+                input.addEventListener('focusin', event => {
+                    document.querySelector(`label[for='${input.id}']`).classList.remove('ds-form-label-empty');
+                });
+                input.addEventListener('focusout', event => {
+                    if (input.value === '') {
+                        document.querySelector(`label[for='${input.id}']`).classList.add('ds-form-label-empty');
+                    }
+                });
+                input.addEventListener('input', event => {
+                    validateFormInputs();
+                });
+            });
+        </script>
+</body>
+
+</html>

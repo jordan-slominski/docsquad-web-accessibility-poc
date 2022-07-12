@@ -1,0 +1,740 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Find Care | DocSquad</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+    <link href="style.css" rel="stylesheet">
+</head>
+
+<body id="find-care">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-auto ds-side-nav">
+                <img class="ds-logo" src="images/docsquad-logo-d.svg" alt="DocSquad logo">
+                <nav class="nav flex-column">
+                    <a class="nav-link" href="visits.html">
+                        <img class="ds-nav-icon" src="images/virtual-visit.svg" alt="">
+                        Care
+                    </a>
+                    <a class="nav-link" href="care-team.html">
+                        <img class="ds-nav-icon" src="images/care-team.svg" alt="">
+                        Team
+                    </a>
+                    <a class="nav-link active" aria-current="page" href="find-care.html">
+                        <img class="ds-nav-icon" src="images/find-care.svg" alt="">
+                        Search
+                    </a>
+                    <a class="nav-link" href="insurance.html">
+                        <img class="ds-nav-icon" src="images/my-insurance.svg" alt="">
+                        Insurance
+                    </a>
+                    <a class="nav-link" href="account.html">
+                        <img class="ds-nav-icon" src="images/account.svg" alt="">
+                        Account
+                    </a>
+                </nav>
+            </div>
+            <div class="col ds-results">
+                <form>
+                    <label class="visually-hidden" for="search">In-Network Providers & Places</label>
+                    <input class="form-control" id="search">
+                    <button type="submit">
+
+                    </button>
+                    <button type="reset">
+
+                    </button>
+                    <p>In Network Results <a href="#">Near Orlando 32802</a></p>
+                </form>
+                <ul class="list-unstyled ds-results-list">
+                    <li v-for="(result, index) in searchResults" v-cloak>
+                        <a class="row" href="#" @click="getSearchResultDetails(index)">
+                            <div class="col-auto">
+                                <div class="ds-stethoscope-icon">
+                                    <img src="images/icon_stethoscope_wide.svg" alt="">
+                                </div>
+                            </div>
+                            <div class="col">
+                                <p class="mb-0">
+                                    <strong>{{ result.name }}, {{ result.degree }}</strong><br>
+                                    {{ result.specialty }}<br>
+                                    {{ result.address.street1 }}<br>
+                                </p>
+                            </div>
+                            <div class="col">
+                                <ul class="list-unstyled">
+                                    <li>
+                                        <img class="ds-results-list-icon" src="images/sf-checkmark.svg" alt="">
+                                        Accepting New Patients
+                                    </li>
+                                    <li>
+                                        <img class="ds-results-list-icon" src="images/sf-dollarsign.svg" alt="">
+                                        In Network
+                                    </li>
+                                    <li>
+                                        <img class="ds-results-list-icon" src="images/sf-globe.svg" alt="">
+                                        <span class="visually-hidden">Languages</span>
+                                        {{ result.languages.join(', ') }}
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="col-auto">
+                                <span class="visually-hidden">Distance</span>
+                                {{ result.distance.toFixed(1) }} mi
+                            </div>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+            <div v-cloak v-if="searchResultsDetails != null" class="col-auto ds-side-details">
+                <h2 class="h3 text-center">{{ searchResultsDetails.name }}, {{ searchResultsDetails.degree }}</h2>
+                <p class="text-center">{{ searchResultsDetails.specialty }}</p>
+                <p>{{ searchResultsDetails.address.street1 }}, {{ searchResultsDetails.address.street2 }} - {{
+                    searchResultsDetails.distance.toFixed(1) }} mi</p>
+            </div>
+        </div>
+        </main>
+        <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.5/dist/umd/popper.min.js"
+            integrity="sha384-Xe+8cL9oJa6tN/veChSP7q+mnSPaj5Bcu9mPX5F5xIGE0DVittaqT5lorf0EI7Vk"
+            crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.min.js"
+            integrity="sha384-kjU+l4N0Yf4ZOJErLsIcvOU2qSb74wXpOhqTvwVx3OElZRweTnQ6d31fXEoRD1Jy"
+            crossorigin="anonymous"></script>
+        <script src="https://unpkg.com/vue@3"></script>
+        <script>
+            const { createApp } = Vue
+            createApp({
+                methods: {
+                    getSearchResultDetails(index) {
+                        this.searchResultsDetails = this.searchResults[index];
+                    }
+                },
+                data() {
+                    return {
+                        searchResults: [
+                            {
+                                "npi": "1174753966",
+                                "locationId": "2V6BD0MRF8XXFFIWCV7OWQU78YRLVXD",
+                                "type": "Provider",
+                                "name": "John Croyle",
+                                "careSpecificity": "Primary Care",
+                                "phone": "(407) 743-7797",
+                                "address": {
+                                    "street1": "14 E WASHINGTON ST",
+                                    "street2": "Ste 200-A20",
+                                    "city": "ORLANDO",
+                                    "state": "FL",
+                                    "zip": "32801",
+                                    "latitude": 28.54345,
+                                    "longitude": -81.37892
+                                },
+                                "specialties": [
+                                    "Physician Assistant"
+                                ],
+                                "attributes": [],
+                                "feGenderResponse": "Male",
+                                "degree": "PA-C",
+                                "languages": [
+                                    "Eng",
+                                    "English"
+                                ],
+                                "acceptingNewPatients": true,
+                                "distance": 0.131765775442632,
+                                "isInNetwork": true,
+                                "specialty": "Physician Assistant"
+                            },
+                            {
+                                "npi": "1518258474",
+                                "locationId": "2V6BD0MRF8XXFFIWCV7OWQU78YRLVXD",
+                                "type": "Provider",
+                                "name": "Sarah Solodkin",
+                                "careSpecificity": "Primary Care",
+                                "phone": "(407) 743-7797",
+                                "address": {
+                                    "street1": "14 E WASHINGTON ST",
+                                    "street2": "Ste 200-A20",
+                                    "city": "ORLANDO",
+                                    "state": "FL",
+                                    "zip": "32801",
+                                    "latitude": 28.54345,
+                                    "longitude": -81.37892
+                                },
+                                "specialties": [
+                                    "Physician Assistant"
+                                ],
+                                "attributes": [],
+                                "feGenderResponse": "Female",
+                                "degree": "PA-C",
+                                "languages": [
+                                    "Eng",
+                                    "English"
+                                ],
+                                "acceptingNewPatients": true,
+                                "distance": 0.131765775442632,
+                                "isInNetwork": true,
+                                "specialty": "Physician Assistant"
+                            },
+                            {
+                                "npi": "1932795259",
+                                "locationId": "2V6BD0MRF8XXFFIWCV7OWQU78YRLVXD",
+                                "type": "Provider",
+                                "name": "Wade Bayless",
+                                "careSpecificity": "Primary Care",
+                                "phone": "(407) 743-7797",
+                                "address": {
+                                    "street1": "14 E WASHINGTON ST",
+                                    "street2": "Ste 200-A20",
+                                    "city": "ORLANDO",
+                                    "state": "FL",
+                                    "zip": "32801",
+                                    "latitude": 28.54345,
+                                    "longitude": -81.37892
+                                },
+                                "specialties": [
+                                    "Physician Assistant"
+                                ],
+                                "attributes": [],
+                                "feGenderResponse": "Male",
+                                "degree": "PA-C",
+                                "languages": [
+                                    "Eng",
+                                    "English"
+                                ],
+                                "acceptingNewPatients": true,
+                                "distance": 0.131765775442632,
+                                "isInNetwork": true,
+                                "specialty": "Physician Assistant"
+                            },
+                            {
+                                "npi": "1174560163",
+                                "locationId": "6LGJQ1KGVJMZRFPR1GAFHUC47B74O0M",
+                                "type": "Provider",
+                                "name": "Deborah Greaves",
+                                "careSpecificity": "Primary Care",
+                                "phone": "(407) 843-1180",
+                                "address": {
+                                    "street1": "320 E SOUTH ST",
+                                    "street2": "Ste 100",
+                                    "city": "ORLANDO",
+                                    "state": "FL",
+                                    "zip": "32801",
+                                    "latitude": 28.53834,
+                                    "longitude": -81.37423
+                                },
+                                "specialties": [
+                                    "Family Practice"
+                                ],
+                                "attributes": [],
+                                "feGenderResponse": "Female",
+                                "degree": "MD",
+                                "languages": [
+                                    "English"
+                                ],
+                                "acceptingNewPatients": true,
+                                "distance": 0.521331885863507,
+                                "isInNetwork": true,
+                                "specialty": "Family Practice"
+                            },
+                            {
+                                "npi": "1881985026",
+                                "locationId": "6LGJQ1KGVJMZRFPR1GAFHUC47B74O0M",
+                                "type": "Provider",
+                                "name": "Erdem Aydur",
+                                "careSpecificity": "Primary Care",
+                                "phone": "(407) 843-1180",
+                                "address": {
+                                    "street1": "320 E SOUTH ST",
+                                    "street2": "Ste 100",
+                                    "city": "ORLANDO",
+                                    "state": "FL",
+                                    "zip": "32801",
+                                    "latitude": 28.53834,
+                                    "longitude": -81.37423
+                                },
+                                "specialties": [
+                                    "Internal Medicine"
+                                ],
+                                "attributes": [],
+                                "feGenderResponse": "Male",
+                                "degree": "M.D.",
+                                "languages": [
+                                    "Turkish",
+                                    "English"
+                                ],
+                                "acceptingNewPatients": true,
+                                "distance": 0.521331885863507,
+                                "isInNetwork": true,
+                                "specialty": "Internal Medicine"
+                            },
+                            {
+                                "npi": "1821358433",
+                                "locationId": "6LGJQ1KGVJMZRFPR1GAFHUC47B74O0M",
+                                "type": "Provider",
+                                "name": "Gigi Kwok",
+                                "careSpecificity": "Primary Care",
+                                "phone": "(407) 843-1180",
+                                "address": {
+                                    "street1": "320 E SOUTH ST",
+                                    "street2": "Ste 100",
+                                    "city": "ORLANDO",
+                                    "state": "FL",
+                                    "zip": "32801",
+                                    "latitude": 28.53834,
+                                    "longitude": -81.37423
+                                },
+                                "specialties": [
+                                    "Family Practice"
+                                ],
+                                "attributes": [],
+                                "feGenderResponse": "Female",
+                                "degree": "MD",
+                                "languages": [
+                                    "Cantonese/Yue",
+                                    "Mandarin Chinese",
+                                    "English"
+                                ],
+                                "acceptingNewPatients": true,
+                                "distance": 0.521331885863507,
+                                "isInNetwork": true,
+                                "specialty": "Family Practice"
+                            },
+                            {
+                                "npi": "1194013169",
+                                "locationId": "6LGJQ1KGVJMZRFPR1GAFHUC47B74O0M",
+                                "type": "Provider",
+                                "name": "Justin Menezes",
+                                "careSpecificity": "Primary Care",
+                                "phone": "(407) 843-1180",
+                                "address": {
+                                    "street1": "320 E SOUTH ST",
+                                    "street2": "Ste 100",
+                                    "city": "ORLANDO",
+                                    "state": "FL",
+                                    "zip": "32801",
+                                    "latitude": 28.53834,
+                                    "longitude": -81.37423
+                                },
+                                "specialties": [
+                                    "Family Practice"
+                                ],
+                                "attributes": [],
+                                "feGenderResponse": "Male",
+                                "degree": "M.D.",
+                                "languages": [
+                                    "Spanish",
+                                    "English"
+                                ],
+                                "acceptingNewPatients": true,
+                                "distance": 0.521331885863507,
+                                "isInNetwork": true,
+                                "specialty": "Family Practice"
+                            },
+                            {
+                                "npi": "1316994395",
+                                "locationId": "6LGJQ1KGVJMZRFPR1GAFHUC47B74O0M",
+                                "type": "Provider",
+                                "name": "Victor Rivera",
+                                "careSpecificity": "Primary Care",
+                                "phone": "(407) 843-1180",
+                                "address": {
+                                    "street1": "320 E SOUTH ST",
+                                    "street2": "Ste 100",
+                                    "city": "ORLANDO",
+                                    "state": "FL",
+                                    "zip": "32801",
+                                    "latitude": 28.53834,
+                                    "longitude": -81.37423
+                                },
+                                "specialties": [
+                                    "Family Practice"
+                                ],
+                                "attributes": [],
+                                "feGenderResponse": "Female",
+                                "degree": "MD",
+                                "languages": [
+                                    "Spanish",
+                                    "English"
+                                ],
+                                "acceptingNewPatients": true,
+                                "distance": 0.521331885863507,
+                                "isInNetwork": true,
+                                "specialty": "Family Practice"
+                            },
+                            {
+                                "npi": "1194111732",
+                                "locationId": "7LAPY8Q7QSCOKJDKHXGJTKWPZFUPNB6",
+                                "type": "Provider",
+                                "name": "Case Tedder",
+                                "careSpecificity": "Primary Care",
+                                "phone": "(407) 641-2444",
+                                "address": {
+                                    "street1": "25 S TERRY AVE",
+                                    "street2": null,
+                                    "city": "ORLANDO",
+                                    "state": "FL",
+                                    "zip": "32805",
+                                    "latitude": 28.5414,
+                                    "longitude": -81.38688
+                                },
+                                "specialties": [
+                                    "Family Practice"
+                                ],
+                                "attributes": [],
+                                "feGenderResponse": "Male",
+                                "degree": "M.D.",
+                                "languages": [
+                                    "English"
+                                ],
+                                "acceptingNewPatients": true,
+                                "distance": 0.601719929612493,
+                                "isInNetwork": true,
+                                "specialty": "Family Practice"
+                            },
+                            {
+                                "npi": "1396061099",
+                                "locationId": "3H6591VNKGVHQHZ6TWRYSFY4PY26N2P",
+                                "type": "Provider",
+                                "name": "Uy Hoang",
+                                "careSpecificity": "Primary Care",
+                                "phone": "(407) 897-3260",
+                                "address": {
+                                    "street1": "518 E COLONIAL DR",
+                                    "street2": null,
+                                    "city": "ORLANDO",
+                                    "state": "FL",
+                                    "zip": "32803",
+                                    "latitude": 28.55308,
+                                    "longitude": -81.37101
+                                },
+                                "specialties": [
+                                    "Family Practice"
+                                ],
+                                "attributes": [],
+                                "feGenderResponse": "Male",
+                                "degree": "M.D.",
+                                "languages": [
+                                    "English"
+                                ],
+                                "acceptingNewPatients": true,
+                                "distance": 0.690585826841847,
+                                "isInNetwork": true,
+                                "specialty": "Family Practice"
+                            },
+                            {
+                                "npi": "1780732867",
+                                "locationId": "AOBA7G5K6431L9CG758FT829PPWMVQ",
+                                "type": "Provider",
+                                "name": "Alexandra Shigo",
+                                "careSpecificity": "Primary Care",
+                                "phone": "(407) 992-0660",
+                                "address": {
+                                    "street1": "801 N ORANGE AVE",
+                                    "street2": "Ste 520",
+                                    "city": "ORLANDO",
+                                    "state": "FL",
+                                    "zip": "32801",
+                                    "latitude": 28.55512,
+                                    "longitude": -81.37911
+                                },
+                                "specialties": [
+                                    "Physician Assistant"
+                                ],
+                                "attributes": [],
+                                "feGenderResponse": "Female",
+                                "degree": "PA-C",
+                                "languages": [
+                                    "English"
+                                ],
+                                "acceptingNewPatients": true,
+                                "distance": 0.692740769374657,
+                                "isInNetwork": true,
+                                "specialty": "Physician Assistant"
+                            },
+                            {
+                                "npi": "1609473594",
+                                "locationId": "AOBA7G5K6431L9CG758FT829PPWMVQ",
+                                "type": "Provider",
+                                "name": "Arianna Piza Cueza",
+                                "careSpecificity": "Primary Care",
+                                "phone": "(407) 992-0660",
+                                "address": {
+                                    "street1": "801 N ORANGE AVE",
+                                    "street2": "Ste 520",
+                                    "city": "ORLANDO",
+                                    "state": "FL",
+                                    "zip": "32801",
+                                    "latitude": 28.55512,
+                                    "longitude": -81.37911
+                                },
+                                "specialties": [
+                                    "Physician Assistant"
+                                ],
+                                "attributes": [],
+                                "feGenderResponse": "Female",
+                                "degree": "PA-C",
+                                "languages": [
+                                    "English"
+                                ],
+                                "acceptingNewPatients": true,
+                                "distance": 0.692740769374657,
+                                "isInNetwork": true,
+                                "specialty": "Physician Assistant"
+                            },
+                            {
+                                "npi": "1467044131",
+                                "locationId": "AOBA7G5K6431L9CG758FT829PPWMVQ",
+                                "type": "Provider",
+                                "name": "Ashley Schulte",
+                                "careSpecificity": "Primary Care",
+                                "phone": "(407) 992-0660",
+                                "address": {
+                                    "street1": "801 N ORANGE AVE",
+                                    "street2": "Ste 520",
+                                    "city": "ORLANDO",
+                                    "state": "FL",
+                                    "zip": "32801",
+                                    "latitude": 28.55512,
+                                    "longitude": -81.37911
+                                },
+                                "specialties": [
+                                    "Physician Assistant"
+                                ],
+                                "attributes": [],
+                                "feGenderResponse": "Female",
+                                "degree": "PA-C",
+                                "languages": [
+                                    "English"
+                                ],
+                                "acceptingNewPatients": true,
+                                "distance": 0.692740769374657,
+                                "isInNetwork": true,
+                                "specialty": "Physician Assistant"
+                            },
+                            {
+                                "npi": "1215991310",
+                                "locationId": "AOBA7G5K6431L9CG758FT829PPWMVQ",
+                                "type": "Provider",
+                                "name": "Caridad Lopez",
+                                "careSpecificity": "Primary Care",
+                                "phone": "(407) 992-0660",
+                                "address": {
+                                    "street1": "801 N ORANGE AVE",
+                                    "street2": "Ste 520",
+                                    "city": "ORLANDO",
+                                    "state": "FL",
+                                    "zip": "32801",
+                                    "latitude": 28.55512,
+                                    "longitude": -81.37911
+                                },
+                                "specialties": [
+                                    "Physician Assistant"
+                                ],
+                                "attributes": [],
+                                "feGenderResponse": "Female",
+                                "degree": "PA",
+                                "languages": [
+                                    "Spanish",
+                                    "English"
+                                ],
+                                "acceptingNewPatients": true,
+                                "distance": 0.692740769374657,
+                                "isInNetwork": true,
+                                "specialty": "Physician Assistant"
+                            },
+                            {
+                                "npi": "1558390013",
+                                "locationId": "AOBA7G5K6431L9CG758FT829PPWMVQ",
+                                "type": "Provider",
+                                "name": "Kimberley Hughes",
+                                "careSpecificity": "Primary Care",
+                                "phone": "(407) 992-0660",
+                                "address": {
+                                    "street1": "801 N ORANGE AVE",
+                                    "street2": "Ste 520",
+                                    "city": "ORLANDO",
+                                    "state": "FL",
+                                    "zip": "32801",
+                                    "latitude": 28.55512,
+                                    "longitude": -81.37911
+                                },
+                                "specialties": [
+                                    "Family Practice - Nurse Practitioner",
+                                    "Nurse Practitioner"
+                                ],
+                                "attributes": [],
+                                "feGenderResponse": "Female",
+                                "degree": "ARNP",
+                                "languages": [
+                                    "English"
+                                ],
+                                "acceptingNewPatients": true,
+                                "distance": 0.692740769374657,
+                                "isInNetwork": true,
+                                "specialty": "Family Practice - Nurse Practitioner"
+                            },
+                            {
+                                "npi": "1598851982",
+                                "locationId": "AOBA7G5K6431L9CG758FT829PPWMVQ",
+                                "type": "Provider",
+                                "name": "Kristen Diehl",
+                                "careSpecificity": "Primary Care",
+                                "phone": "(407) 992-0660",
+                                "address": {
+                                    "street1": "801 N ORANGE AVE",
+                                    "street2": "Ste 520",
+                                    "city": "ORLANDO",
+                                    "state": "FL",
+                                    "zip": "32801",
+                                    "latitude": 28.55512,
+                                    "longitude": -81.37911
+                                },
+                                "specialties": [
+                                    "Physician Assistant"
+                                ],
+                                "attributes": [],
+                                "feGenderResponse": "Female",
+                                "degree": "PA-C",
+                                "languages": [
+                                    "English"
+                                ],
+                                "acceptingNewPatients": true,
+                                "distance": 0.692740769374657,
+                                "isInNetwork": true,
+                                "specialty": "Physician Assistant"
+                            },
+                            {
+                                "npi": "1952775462",
+                                "locationId": "AOBA7G5K6431L9CG758FT829PPWMVQ",
+                                "type": "Provider",
+                                "name": "Melissa Shaw",
+                                "careSpecificity": "Primary Care",
+                                "phone": "(407) 992-0660",
+                                "address": {
+                                    "street1": "801 N ORANGE AVE",
+                                    "street2": "Ste 520",
+                                    "city": "ORLANDO",
+                                    "state": "FL",
+                                    "zip": "32801",
+                                    "latitude": 28.55512,
+                                    "longitude": -81.37911
+                                },
+                                "specialties": [
+                                    "Physician Assistant"
+                                ],
+                                "attributes": [],
+                                "feGenderResponse": "Female",
+                                "degree": "PA",
+                                "languages": [
+                                    "English"
+                                ],
+                                "acceptingNewPatients": true,
+                                "distance": 0.692740769374657,
+                                "isInNetwork": true,
+                                "specialty": "Physician Assistant"
+                            },
+                            {
+                                "npi": "1558475194",
+                                "locationId": "CVOQ7M7JQYS3WEGUDEI0RKZQWPL296G",
+                                "type": "Provider",
+                                "name": "Ivette Rosario",
+                                "careSpecificity": "Primary Care",
+                                "phone": "(407) 895-9019",
+                                "address": {
+                                    "street1": "601 E COLONIAL DR",
+                                    "street2": null,
+                                    "city": "ORLANDO",
+                                    "state": "FL",
+                                    "zip": "32803",
+                                    "latitude": 28.55328,
+                                    "longitude": -81.36963
+                                },
+                                "specialties": [
+                                    "Internal Medicine"
+                                ],
+                                "attributes": [],
+                                "feGenderResponse": "Female",
+                                "degree": "M.D.",
+                                "languages": [
+                                    "Spanish",
+                                    "English"
+                                ],
+                                "acceptingNewPatients": true,
+                                "distance": 0.754748343155246,
+                                "isInNetwork": true,
+                                "specialty": "Internal Medicine"
+                            },
+                            {
+                                "npi": "1538107487",
+                                "locationId": "DVERIWRE3TPHO8HD3KIB23MOUU542GU",
+                                "type": "Provider",
+                                "name": "Hector Nieves-Vazquez",
+                                "careSpecificity": "Primary Care",
+                                "phone": "(407) 895-9255",
+                                "address": {
+                                    "street1": "708 E COLONIAL DR",
+                                    "street2": "Ste 200",
+                                    "city": "ORLANDO",
+                                    "state": "FL",
+                                    "zip": "32803",
+                                    "latitude": 28.5531,
+                                    "longitude": -81.36851
+                                },
+                                "specialties": [
+                                    "General Practice",
+                                    "Pediatric Medicine (Children)"
+                                ],
+                                "attributes": [],
+                                "feGenderResponse": "Male",
+                                "degree": "M.D.",
+                                "languages": [
+                                    "English"
+                                ],
+                                "acceptingNewPatients": true,
+                                "distance": 0.79306568525003,
+                                "isInNetwork": true,
+                                "specialty": "General Practice"
+                            },
+                            {
+                                "npi": "1558475194",
+                                "locationId": "DVERIWRE3TPHO8HD3KIB23MOUU542GU",
+                                "type": "Provider",
+                                "name": "Ivette Rosario",
+                                "careSpecificity": "Primary Care",
+                                "phone": "(407) 895-9255",
+                                "address": {
+                                    "street1": "708 E COLONIAL DR",
+                                    "street2": "Ste 200",
+                                    "city": "ORLANDO",
+                                    "state": "FL",
+                                    "zip": "32803",
+                                    "latitude": 28.5531,
+                                    "longitude": -81.36851
+                                },
+                                "specialties": [
+                                    "Internal Medicine"
+                                ],
+                                "attributes": [],
+                                "feGenderResponse": "Female",
+                                "degree": "M.D.",
+                                "languages": [
+                                    "English"
+                                ],
+                                "acceptingNewPatients": true,
+                                "distance": 0.79306568525003,
+                                "isInNetwork": true,
+                                "specialty": "Internal Medicine"
+                            }
+                        ],
+                        searchResultsDetails: null
+                    }
+                }
+            }).mount('#find-care')
+        </script>
+
+</body>
+
+</html>
